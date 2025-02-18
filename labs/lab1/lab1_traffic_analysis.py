@@ -5,7 +5,7 @@ import pandas as pd
 def main():
     # Load the traffic dataset
     try:
-        df = pd.read_csv('../../datasets/traffic_data.csv')
+        df = pd.read_csv('./datasets/traffic_data.csv')
     except FileNotFoundError:
         print("Error: The dataset file was not found. Please ensure 'traffic_data.csv' is located in the /datasets/ folder.")
         return
