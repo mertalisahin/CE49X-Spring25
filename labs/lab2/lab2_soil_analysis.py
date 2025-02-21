@@ -58,7 +58,6 @@ def print_statistics(col,output):
     print(f"  Median: {output['median']:.2f}")
     print(f"  Standard Deviation: {output['std_dev']:.2f}")
 
-
 def main():
     filepath = './datasets/soil_test.csv'
     df = load_data(filepath)
@@ -71,7 +70,6 @@ def main():
         if col != "sample_id": #Compute columns except sample_id
             output = compute_statistics(col,clean_df)
             print_statistics(col, output)
-
 
 if __name__ == '__main__':
     main()
