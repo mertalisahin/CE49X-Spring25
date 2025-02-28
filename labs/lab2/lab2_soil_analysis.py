@@ -17,16 +17,15 @@ def clean_data(df):
     #Filling missing values with column mean
     clean_df.fillna(clean_df.mean(), inplace=True) 
 
-    numeric_columns = clean_df.select_dtypes(include=[np.number])
+    numeric_columns = clean_df.select_dtypes(include=[np.number]).columns[1:] #Exlude sample_id column from outlier check
 
     #Removing outliers
     for col in numeric_columns:
-        if col != "sample_id":
-            std_col = df[col].std()
-            mean_col = df[col].mean()
-            lower_bound = mean_col - 3 * std_col
-            upper_bound = mean_col + 3 * std_col
-            clean_df = clean_df[(clean_df[col] >= lower_bound) & (clean_df[col] <= upper_bound)]
+        std_col = df[col].std()
+        mean_col = df[col].mean()
+        lower_bound = mean_col - 3 * std_col
+        upper_bound = mean_col + 3 * std_col
+        clean_df = clean_df[(clean_df[col] >= lower_bound) & (clean_df[col] <= upper_bound)]
 
     return clean_df
 
@@ -67,10 +66,9 @@ def main():
     
     clean_df = clean_data(df)
     
-    for col in clean_df.columns:
-        if col != "sample_id": #Compute columns except sample_id
-            output = compute_statistics(col,clean_df)
-            print_statistics(col, output)
+    for col in clean_df.columns[1:]: #Exclude sample_id column
+        output = compute_statistics(col,clean_df)
+        print_statistics(col, output)
 
 if __name__ == '__main__':
     main()
