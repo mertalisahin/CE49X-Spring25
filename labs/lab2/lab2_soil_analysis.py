@@ -21,11 +21,12 @@ def clean_data(df):
 
     #Removing outliers
     for col in numeric_columns:
-        std_col = df[col].std()
-        mean_col = df[col].mean()
-        lower_bound = mean_col - 3 * std_col
-        upper_bound = mean_col + 3 * std_col
-        clean_df = clean_df[(clean_df[col] >= lower_bound) & (clean_df[col] <= upper_bound)]
+        if col != "sample_id":
+            std_col = df[col].std()
+            mean_col = df[col].mean()
+            lower_bound = mean_col - 3 * std_col
+            upper_bound = mean_col + 3 * std_col
+            clean_df = clean_df[(clean_df[col] >= lower_bound) & (clean_df[col] <= upper_bound)]
 
     return clean_df
 
