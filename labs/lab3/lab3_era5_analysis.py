@@ -125,7 +125,7 @@ def plot_wind_direction(df, city_name="City"):
     plt.show()
 
 def main():
-    # Define file paths (adjust these file names as necessary)
+
     berlin_file = './datasets/berlin_era5_wind_20241231_20241231.csv'
     munich_file = './datasets/munich_era5_wind_20241231_20241231.csv'
     
@@ -133,10 +133,9 @@ def main():
     berlin_df = load_and_explore_dataset(berlin_file)
     munich_df = load_and_explore_dataset(munich_file)
     
-    # If either dataset failed to load, exit the script
     if berlin_df is None or munich_df is None:
         print("One or both datasets could not be loaded. Exiting.")
-        return
+        quit()
     
     # Calculate wind speed for both datasets
     berlin_df = calculate_wind_speed(berlin_df)
@@ -170,6 +169,8 @@ def main():
     plot_seasonal_comparison(berlin_seasonal_wind, munich_seasonal_wind)
     
     plot_wind_direction(berlin_df, city_name="Berlin")
+    plot_wind_direction(munich_df, city_name="Munich")
+
     
 if __name__ == "__main__":
     main()
