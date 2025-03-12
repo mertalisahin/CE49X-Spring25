@@ -116,7 +116,7 @@ def plot_wind_direction(df, city_name="City"):
     
     # Create a polar plot
     theta = np.deg2rad(bins[:-1] + 11.25)  # center of each bin
-    widths = np.deg2rad(22.5 * np.ones_like(theta))
+    widths = np.deg2rad([22.5] * len(theta))
     
     ax = plt.subplot(111, polar=True)
     ax.bar(theta, counts, width=widths, bottom=0.0, edgecolor='black', align='center')
