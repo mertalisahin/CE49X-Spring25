@@ -9,14 +9,14 @@ def load_and_explore_dataset(file_path):
         print(f"Error: {file_path} not found.")
         return None
     except Exception as e:
-        print(f"Error loading {file_path}: {e}")
+        print(f"Error loading {file_path}")
         return None
 
     # Convert timestamp to datetime
     try:
         df['timestamp'] = pd.to_datetime(df['timestamp'])
     except Exception as e:
-        print(f"Error converting timestamp in {file_path}: {e}")
+        print(f"Error converting timestamp in {file_path}")
 
     # Display basic information
     print(f"\nDataset: {file_path}")
@@ -24,7 +24,7 @@ def load_and_explore_dataset(file_path):
     print("Columns:", df.columns.tolist())
     print("Data Types:\n", df.dtypes)
     
-    # Handling missing values: simple forward-fill; adjust as necessary
+    # Handling missing values
     if df.isnull().values.any():
         df.fillna(df.mean(), inplace=True)
     # Display summary statistics
@@ -107,14 +107,13 @@ def plot_seasonal_comparison(berlin_seasonal, munich_seasonal):
 
 def plot_wind_direction(df, city_name="City"):
     
-    # Compute wind direction in degrees (0°=East, counter-clockwise)
+
     wind_dir = (np.degrees(np.arctan2(df['v10m'], df['u10m'])) + 360) % 360
 
-    # Bin directions into 16 sectors (22.5° each)
+
     bins = np.arange(0, 361, 22.5)
     counts, _ = np.histogram(wind_dir, bins=bins)
-    
-    # Create a polar plot
+
     theta = np.deg2rad(bins[:-1] + 11.25)  # center of each bin
     widths = np.deg2rad([22.5] * len(theta))
     
@@ -149,14 +148,14 @@ def main():
     berlin_seasonal_wind = aggregate_seasonal(berlin_df.copy(), 'wind_speed')
     munich_seasonal_wind = aggregate_seasonal(munich_df.copy(), 'wind_speed')
     
-    # Identify extreme weather periods (top 5 highest wind speeds)
+    # Identify extreme weather periods
     print("\nBerlin Extreme Weather Periods:")
     print(extreme_weather_periods(berlin_df))
     
     print("\nMunich Extreme Weather Periods:")
     print(extreme_weather_periods(munich_df))
     
-    # Calculate diurnal patterns (daily hour averages) for wind speed
+    # Calculate diurnal patterns
     berlin_diurnal = diurnal_pattern(berlin_df.copy(), 'wind_speed')
     munich_diurnal = diurnal_pattern(munich_df.copy(), 'wind_speed')
     print("\nBerlin Diurnal Wind Speed Pattern:\n", berlin_diurnal)
