@@ -23,7 +23,7 @@ def preprocess_data(df):
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
 
-    X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=61)
+    X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2)
     return X_train, X_test, y_train, y_test
 
 def train_model(X_train, y_train):
@@ -84,7 +84,7 @@ def explore_data(df):
     return df
 
 def main():
-    filepath = "datasets\concrete_strength\Concrete_Data.xls"
+    filepath = "../../datasets/concrete_strength/Concrete_Data.xls"
     concrete_df = load_data(filepath)
     if concrete_df is None:
         quit()
