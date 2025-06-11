@@ -93,6 +93,7 @@ def test_validate_data_invalid(sample_data_df):
 
     # Test invalid numeric data
     invalid_data = sample_data_df.copy()
+    invalid_data['quantity_kg'] = invalid_data['quantity_kg'].astype('object')
     invalid_data.loc[0, 'quantity_kg'] = 'invalid'
     result = data_input.validate_data(invalid_data)
     assert result['is_valid'] is False

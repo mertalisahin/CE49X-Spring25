@@ -107,6 +107,14 @@ def test_visualization_errors():
         visualizer.plot_impact_breakdown(df, 'carbon_impact', 'material_type')
         
     # Test with no data for a specific product
-    df = pd.DataFrame({'product_id': ['P999']})
+    df = pd.DataFrame({
+        'product_id': ['P999'],
+        'life_cycle_stage': ['Manufacturing'],
+        # Add other required impact columns with dummy data if needed by the function
+        'carbon_impact': [0],
+        'energy_impact': [0],
+        'water_impact': [0],
+        'waste_generated_kg': [0]
+    })
     with pytest.raises(VisualizationError, match="No data found for product ID: P001"):
         visualizer.plot_life_cycle_impacts(df, 'P001')

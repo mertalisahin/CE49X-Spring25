@@ -38,9 +38,9 @@ class DataInput:
                 content = f.read(100).strip()
                 if content.startswith('{') or content.startswith('['):
                     return '.json'
-            
-            # Default to CSV
-            return '.csv'
+                
+            # If no extension or content detection, fallback to extension
+            return file_path.suffix.lower()
         except Exception as e:
             print(f"Could not detect file format: {e}")
             return file_path.suffix.lower()
