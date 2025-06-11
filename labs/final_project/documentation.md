@@ -8,9 +8,6 @@ A comprehensive Python tool for environmental impact analysis and life cycle ass
 - [Project Structure](#project-structure)
 - [Usage](#usage)
 - [Modules Overview](#modules-overview)
-- [Input Data Format](#input-data-format)
-  - [Product Data (`sample_data.csv`)](#product-data-sample_datacs)
-  - [Impact Factors (`impact_factors.json`)](#impact-factors-impact_factorsjson)
 
 ## Features
 
@@ -112,39 +109,6 @@ This file contains the raw data for the products being analyzed. It must include
 - `carbon_footprint_kg_co2e`: Direct carbon emissions measurement.
 - `water_usage_liters`: Direct water usage measurement.
 
-### Impact Factors (`impact_factors.json`)
 
-This JSON file provides the conversion factors used to calculate impacts from material quantities. It follows a nested structure:
 
-`Material -> Life Cycle Stage -> Impact Type`
-
-**Example Structure:**
-
-```json
-{
-  "steel": {
-    "manufacturing": {
-      "carbon_impact": 1.8,
-      "energy_impact": 20.0,
-      "water_impact": 250.0
-    },
-    "disposal": {
-      "carbon_impact": 0.1,
-      "energy_impact": 0.5,
-      "water_impact": 5.0
-    }
-  },
-  "plastic": {
-    "manufacturing": {
-      "carbon_impact": 2.5,
-      "energy_impact": 70.0,
-      "water_impact": 180.0
-    },
-    "disposal": {
-      "carbon_impact": 0.5,
-      "energy_impact": 1.2,
-      "water_impact": 10.0
-    }
-  }
-}
 
