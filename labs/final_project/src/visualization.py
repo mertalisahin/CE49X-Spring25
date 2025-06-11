@@ -181,7 +181,7 @@ class LCAVisualizer:
                         aggfunc='sum'
                     )
                     
-                    if not stage_data.empty and stage_data.sum() > 0:
+                    if not stage_data.empty and stage_data[impact_type].sum() > 0:
                         colors = self._get_colors(len(stage_data))
                         stage_data.plot(kind='bar', ax=axes[idx], 
                                       color=colors[0], alpha=0.7)

@@ -1,0 +1,24 @@
+[
+  {
+    "product_id":"P001",
+    "product_name":"Reinforced Concrete",
+    "carbon_impact":625.0,
+    "energy_impact":6500.0,
+    "water_impact":200000.0,
+    "waste_generated_kg":2625.0,
+    "carbon_impact_relative":0.0,
+    "energy_impact_relative":0.0,
+    "water_impact_relative":110.5263157895
+  },
+  {
+    "product_id":"P002",
+    "product_name":"Structural Steel Beam",
+    "carbon_impact":1200.0,
+    "energy_impact":13000.0,
+    "water_impact":95000.0,
+    "waste_generated_kg":525.0,
+    "carbon_impact_relative":92.0,
+    "energy_impact_relative":100.0,
+    "water_impact_relative":0.0
+  }
+]
