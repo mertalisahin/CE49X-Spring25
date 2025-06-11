@@ -69,6 +69,9 @@ class LCAVisualizer:
         """
         Create a pie chart showing impact breakdown by specified grouping.
         
+        This function now groups small slices into an "Other" category to prevent
+        text overlap and improve readability.
+        
         Args:
             data: DataFrame with impact data
             impact_type: Type of impact to plot
@@ -90,7 +93,7 @@ class LCAVisualizer:
             # Group and sum impacts
             impact_data = data.groupby(group_by)[impact_type].sum()
             
-            # Remove zero values
+            # Remove zero or negative values
             impact_data = impact_data[impact_data > 0]
             
             if impact_data.empty:
@@ -100,12 +103,28 @@ class LCAVisualizer:
                 ax.set_xlim(0, 1)
                 ax.set_ylim(0, 1)
             else:
-                colors = self._get_colors(len(impact_data))
-                wedges, texts, autotexts = ax.pie(impact_data.values, 
-                                                 labels=impact_data.index, 
+                # --- FIX START: Group small slices to prevent text overlap ---
+                threshold = 3.0  # Group slices smaller than 3% into "Other"
+                
+                # Calculate percentages to identify small slices
+                percentages = impact_data / impact_data.sum() * 100
+                small_slices = percentages < threshold
+                
+                plot_data = impact_data.copy()
+                # Check if there are small slices to group and that not ALL slices are small
+                if small_slices.any() and not small_slices.all():
+                    other_sum = plot_data[small_slices].sum()
+                    plot_data = plot_data[~small_slices]  # Keep large slices
+                    plot_data['Other'] = other_sum        # Add the 'Other' slice
+                # --- FIX END ---
+
+                colors = self._get_colors(len(plot_data))
+                wedges, texts, autotexts = ax.pie(plot_data, 
+                                                 labels=plot_data.index, 
                                                  autopct='%1.1f%%',
                                                  colors=colors,
-                                                 startangle=90)
+                                                 startangle=90,
+                                                 textprops={'fontsize': 12}) # Control font size
                 
                 # Improve text readability
                 for autotext in autotexts:
@@ -114,12 +133,12 @@ class LCAVisualizer:
             
             # Set title
             if title:
-                ax.set_title(title, fontsize=14, fontweight='bold')
+                ax.set_title(title, fontsize=16, fontweight='bold', pad=20)
             else:
                 impact_label = self.impact_labels.get(impact_type, impact_type)
                 group_label = group_by.replace('_', ' ').title()
                 ax.set_title(f'{impact_label} by {group_label}', 
-                           fontsize=14, fontweight='bold')
+                           fontsize=16, fontweight='bold', pad=20)
             
             plt.tight_layout()
             
