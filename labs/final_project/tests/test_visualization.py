@@ -5,7 +5,7 @@ Tests for the visualization module.
 import pytest
 import pandas as pd
 import matplotlib.pyplot as plt
-from src.visualization import LCAVisualizer, VisualizationError
+from src import LCAVisualizer, VisualizationError
 
 @pytest.fixture
 def sample_impact_data():

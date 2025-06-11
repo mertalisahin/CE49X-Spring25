@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 import json
 from pathlib import Path
-from src.calculations import LCACalculator
+from src import LCACalculator
 
 @pytest.fixture
 def sample_data():

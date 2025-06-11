@@ -7,7 +7,7 @@ import pandas as pd
 import json
 from pathlib import Path
 import numpy as np
-from src.data_input import DataInput, DataValidationError
+from src import DataInput, DataValidationError
 
 @pytest.fixture
 def sample_data_df():

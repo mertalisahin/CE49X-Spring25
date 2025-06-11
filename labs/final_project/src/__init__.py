@@ -21,7 +21,7 @@ Exceptions:
     VisualizationError: Custom exception for visualization errors
 
 Example:
-    >>> from lca_tool import DataInput, LCACalculator, LCAVisualizer
+    >>> from src import DataInput, LCACalculator, LCAVisualizer
     >>> 
     >>> # Load and validate data
     >>> data_input = DataInput()
@@ -57,7 +57,7 @@ __author__ = "Mert Ali Şahin"
 __email__ = "mail@mertalisahin.com"
 __description__ = "A comprehensive tool for environmental impact analysis and life cycle assessment"
 
-# Define what gets imported with "from lca_tool import *"
+# Define what gets imported with "from src import *"
 __all__ = [
     # Main classes
     'DataInput',
