@@ -8,3 +8,9 @@
 **/.virtual_documents/
 # You might also want to ignore other temporary files if needed
 
+labs/final_project/tests/__pycache__/test_visualization.cpython-310-pytest-8.3.4.pyc
+labs/final_project/tests/__pycache__/test_calculations.cpython-310-pytest-8.3.4.pyc
+labs/final_project/tests/__pycache__/test_data_input.cpython-310-pytest-8.3.4.pyc
+labs/final_project/src/__pycache__/visualization.cpython-310.pyc
+labs/final_project/src/__pycache__/data_input.cpython-310.pyc
+labs/final_project/src/__pycache__/calculations.cpython-310.pyc
